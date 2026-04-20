@@ -1,0 +1,30 @@
+vpc_id    = "vpc-0123456789abcdef0"
+subnet_id = "subnet-0123456789abcdef0"
+
+allowed_ssh_cidrs = [
+  "198.51.100.20/32",
+]
+
+companies = [
+  {
+    name  = "BidSwitch"
+    email = "privacy@bidswitch.com"
+  },
+  {
+    name  = "Bookyourdata"
+    email = "optout@bookyourdata.com"
+  },
+]
+
+ses_from_email     = "noreply@example.com"
+ses_requests_email = "requests@example.com"
+
+# Uncomment to enable DNS + HTTPS
+# route53_zone_id = "Z0123456789ABCDEF"
+# hostname        = "remove.example.com"
+# enable_https    = true
+# acme_email      = "ops@example.com"
+
+# Uncomment to use a domain-wide SES identity instead of separate email identities
+# ses_identity_type = "domain"
+# ses_domain        = "example.com"

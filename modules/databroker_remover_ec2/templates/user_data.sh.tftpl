@@ -1,0 +1,38 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+exec > >(tee -a /var/log/databroker-remover-user-data.log | logger -t databroker-remover-user-data -s 2>/dev/console) 2>&1
+
+cat >/usr/local/bin/bootstrap-databroker-remover.sh <<'BOOTSTRAP'
+${bootstrap_script}
+BOOTSTRAP
+chmod 0755 /usr/local/bin/bootstrap-databroker-remover.sh
+
+cat >/etc/systemd/system/${service_name} <<'SERVICE'
+${service_content}
+SERVICE
+
+cat >/etc/nginx/sites-available/databroker-remover.conf <<'NGINX'
+${nginx_content}
+NGINX
+
+chmod 0644 /etc/systemd/system/${service_name}
+chmod 0644 /etc/nginx/sites-available/databroker-remover.conf
+
+cat >/etc/default/databroker-remover-bootstrap <<EOF
+AWS_REGION=${aws_region}
+APP_USER=${app_user}
+APP_PORT=${app_port}
+APP_DIR=${app_dir}
+GITHUB_REPO=${github_repo}
+GITHUB_BRANCH=${github_branch}
+ENABLE_HTTPS=${enable_https}
+HOSTNAME_VALUE=${hostname}
+ACME_EMAIL=${acme_email}
+OPENAI_API_KEY_SECRET_ARN=${openai_api_key_secret_arn}
+SSM_PARAMETER_NAMES="${join(" ", parameter_names)}"
+EOF
+
+chmod 0600 /etc/default/databroker-remover-bootstrap
+
+/usr/local/bin/bootstrap-databroker-remover.sh

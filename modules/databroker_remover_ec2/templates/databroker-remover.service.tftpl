@@ -1,0 +1,20 @@
+[Unit]
+Description=Data Broker Remover Next.js application
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=${app_user}
+Group=${app_user}
+WorkingDirectory=${app_dir}
+EnvironmentFile=${app_dir}/.env.local
+ExecStart=/usr/bin/env pnpm start -- --hostname 127.0.0.1 --port ${app_port}
+Restart=always
+RestartSec=5
+TimeoutStartSec=120
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
