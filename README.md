@@ -18,7 +18,7 @@ This tool helps a user request removal of personal information from data broker 
 - automatically sending removal requests to 60+ data brokers
 - CC'ing the user on outgoing emails for transparency
 
----
+
 
 ## Choose your path
 
@@ -32,7 +32,7 @@ Use this if you want to develop or test the app on your laptop.
 
 Use this if you want AWS to provision and host the application.
 
----
+
 
 ## Important credential rule
 
@@ -57,7 +57,7 @@ That means:
 - **local dev** can use static AWS credentials
 - **EC2** should use the instance role instead
 
----
+
 
 ## Option A: Run locally
 
@@ -69,7 +69,6 @@ That means:
 
 ### Clone this repository
 
-```bash
 git clone https://github.com/Banta-Technologies/data-broker-remover.git
 cd data-broker-remover
 
