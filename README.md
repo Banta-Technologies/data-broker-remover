@@ -72,3 +72,39 @@ That means:
 ```bash
 git clone https://github.com/Banta-Technologies/data-broker-remover.git
 cd data-broker-remover
+
+### Install dependencies
+pnpm install
+
+### Create local environment file
+cp .env.example .env.local
+
+### Configure .env.local
+Example:
+# AWS configuration
+VITE_AWS_REGION=eu-west-2
+VITE_TABLE_NAME=data-broker-remover-users
+AWS_REGION=eu-west-2
+
+# Data broker email list
+VITE_COMPANIES=BrokerName1,email1@domain.com:BrokerName2,email2@domain.com
+
+# SES sender settings
+SES_FROM_EMAIL=noreply@yourdomain.com
+SES_REQUESTS_EMAIL=requests@yourdomain.com
+
+# Local development only
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+
+# Optional AI assistant foundation
+ENABLE_AI_ASSISTANT=false
+OPENAI_MODEL=gpt-5.4
+ASSISTANT_SCOPE_MODE=strict
+# OPENAI_API_KEY=sk-...   # optional, local-only for assistant testing
+
+### Start the app
+pnpm dev
+
+Visit:
+http://localhost:3000
