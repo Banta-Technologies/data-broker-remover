@@ -154,7 +154,7 @@ Your application needs permission to:
 * read and write the DynamoDB table
 
 Example policy:
-
+````
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -170,6 +170,7 @@ Example policy:
     }
   ]
 }
+````
 
 ## Option B: Deploy to AWS EC2 with Terraform
 
