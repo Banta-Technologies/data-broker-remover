@@ -217,4 +217,42 @@ The Terraform module under modules/databroker_remover_ec2 provisions:
 * do not use static AWS keys on the server
 * the EC2 instance gets AWS access through its IAM role
 
+## Terraform quick start
+  From examples/basic:
+````
+cp terraform.tfvars.example terraform.tfvars
+terraform init
+terraform plan
+terraform apply
+````
+### Post-deploy verification
 
+SSH to the instance:
+
+````
+ssh ubuntu@<instance-public-ip>
+````
+Check cloud-init and bootstrap logs:
+````
+sudo tail -n 200 /var/log/cloud-init-output.log
+sudo tail -n 200 /var/log/databroker-remover-user-data.log
+sudo tail -n 200 /var/log/databroker-remover-bootstrap.log
+````
+Check app and reverse proxy health:
+````
+curl http://127.0.0.1:3000
+curl http://127.0.0.1/healthz
+````
+Check services:
+````
+sudo systemctl status databroker-remover.service
+sudo systemctl status nginx
+````
+### Privacy and security
+- Email hashing: email addresses are hashed with SHA256 before storage
+- No personal data storage: user details such as name and address are used to generate emails and are not stored
+- Rate limiting: users can only send requests once every 45 days
+- Open source: code can be audited
+- IAM role on EC2: Terraform deployment uses an instance profile instead of static access keys
+- Assistant secrets stay server-side: OPENAI_API_KEY is never exposed to the browser
+- Assistant scope guardrails: the assistant only answers app-grounded privacy-removal questions and refuses unrelated topics
