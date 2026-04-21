@@ -89,22 +89,22 @@ VITE_TABLE_NAME=data-broker-remover-users
 AWS_REGION=eu-west-2
 ````
 
-# Data broker email list
+### Data broker email list
 ````
 VITE_COMPANIES=BrokerName1,email1@domain.com:BrokerName2,email2@domain.com
 ````
-# SES sender settings
+### SES sender settings
 ````
 SES_FROM_EMAIL=noreply@yourdomain.com
 SES_REQUESTS_EMAIL=requests@yourdomain.com
 ````
-# Local development only
+### Local development only
 ````
 AWS_ACCESS_KEY_ID=your_access_key
 AWS_SECRET_ACCESS_KEY=your_secret_key
 ````
 
-# Optional AI assistant foundation
+### Optional AI assistant foundation
 ````
 ENABLE_AI_ASSISTANT=false
 OPENAI_MODEL=gpt-5.4
@@ -125,7 +125,7 @@ http://localhost:3000
 ## Local AWS setup
 If you are running locally, you must create the DynamoDB table and SES templates yourself.
 
-### 1. Create the DynamoDB table
+#### 1. Create the DynamoDB table
 ````
 aws dynamodb create-table \
   --table-name data-broker-remover-users \
