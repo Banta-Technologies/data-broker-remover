@@ -76,9 +76,9 @@ cd data-broker-remover
 pnpm install
 
 ### Create local environment file
-```` ```bash ````
+````
 cp .env.example .env.local
-```` ``` ````
+````
 
 ### Configure .env.local
 Example:
