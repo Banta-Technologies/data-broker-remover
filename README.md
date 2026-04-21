@@ -112,7 +112,7 @@ ASSISTANT_SCOPE_MODE=strict
 ````
 #### OPENAI_API_KEY=sk-...   # optional, local-only for assistant testing
 
-### Start the app
+## Start the app
 ````
 pnpm dev
 ````
@@ -125,7 +125,7 @@ http://localhost:3000
 ## Local AWS setup
 If you are running locally, you must create the DynamoDB table and SES templates yourself.
 
-#### 1. Create the DynamoDB table
+### 1. Create the DynamoDB table
 ````
 aws dynamodb create-table \
   --table-name data-broker-remover-users \
