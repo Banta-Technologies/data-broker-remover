@@ -80,12 +80,12 @@ pnpm install
 cp .env.example .env.local
 ````
 
-### Configure .env.local
+### Configure ```` .env.local ````
 Example:
 # AWS configuration
-VITE_AWS_REGION=eu-west-2
+```` VITE_AWS_REGION=eu-west-2
 VITE_TABLE_NAME=data-broker-remover-users
-AWS_REGION=eu-west-2
+AWS_REGION=eu-west-2 ````
 
 # Data broker email list
 VITE_COMPANIES=BrokerName1,email1@domain.com:BrokerName2,email2@domain.com
