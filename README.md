@@ -1,4 +1,6 @@
 # Data Broker Remover
+https://github.com/visible-cx/databroker_remover
+https://chatgpt.com/share/69e9275f-4f34-83ea-9023-274dbe5844a3
 
 A Next.js application that helps users send personal-data removal requests to data brokers.
 
