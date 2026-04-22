@@ -289,3 +289,110 @@ OPENAI_MODEL=gpt-5.4
 ASSISTANT_SCOPE_MODE=strict
 OPENAI_API_KEY=sk-...
 ````
+## Important AI security note
+- OPENAI_API_KEY must stay server-side
+- the browser must never receive the API key
+- if the assistant is enabled without a key, it should fail gracefully
+
+### Quick validation
+
+AI off:
+````
+ENABLE_AI_ASSISTANT=false
+````
+
+Expected behavior:
+
+- assistant panel is hidden
+- app behaves normally
+
+AI on without key:
+````
+ENABLE_AI_ASSISTANT=true
+````
+Expected behavior:
+
+- assistant panel appears
+- route returns a graceful error
+- logs explain why the assistant is unavailable
+
+AI on with key:
+````
+ENABLE_AI_ASSISTANT=true
+OPENAI_API_KEY=sk-...
+````
+Expected behavior:
+````
+assistant can answer only app-grounded workflow questions
+````
+## Project structure
+````
+.
+├── app/                            # Next.js app router
+├── app/api/assistant/chat/         # Strict, server-side assistant route
+├── components/                     # UI and workflow components
+├── components/ui/                  # shadcn/ui components
+├── components/data-broker-remover/ # App workflow components
+├── lib/data-broker-remover/        # AWS clients, broker list, types, helpers
+├── lib/assistant/                  # Assistant config, prompt, scope, context, provider
+├── modules/databroker_remover_ec2/ # Reusable Terraform module
+├── examples/basic/                 # Example Terraform root config
+└── actions/                        # Server actions
+````
+## Other deployment options
+### Vercel
+````
+npm i -g vercel
+vercel
+````
+Add environment variables in the Vercel dashboard.
+
+## Docker
+````
+docker build -t databroker-remover .
+docker run -p 3000:3000 --env-file .env.local databroker-remover
+````
+## Other compatible platforms
+- AWS Amplify
+- Netlify
+- Railway
+- Fly.io
+
+## Troubleshooting
+### "Email address not verified"
+
+If SES is in sandbox mode, both sender and recipient may need to be verified.
+
+### "Table does not exist"
+
+Make sure VITE_TABLE_NAME matches the DynamoDB table name.
+
+### "Access denied"
+
+Check IAM permissions.
+
+### "Assistant is enabled but unavailable"
+
+Check:
+````
+ENABLE_AI_ASSISTANT=true
+OPENAI_API_KEY is present server-side
+server logs for assistant_misconfigured or assistant_error
+````
+### Known caveats
+The app still uses VITE_* variable names because that is part of the current app contract.
+SES sandbox restrictions can block otherwise correct tests.
+The assistant is intentionally domain-limited and is not a general chatbot.
+If build or runtime assumptions change upstream, the EC2 bootstrap may need adjustment.
+
+### License
+
+MIT License. See LICENSE.
+
+### Contributing
+
+Contributions are welcome. Please open an issue or submit a pull request.
+
+### Support
+- Issues
+- Discussions
