@@ -34,9 +34,7 @@ Use this if you want AWS to provision and host the application.
 
 
 
-#### *Important credential rule*
-
-This is the biggest source of confusion, so here is the plain-English version:
+## *Important credential rule*
 
 ### Local development
 
