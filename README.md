@@ -254,3 +254,38 @@ sudo systemctl status nginx
 - IAM role on EC2: Terraform deployment uses an instance profile instead of static access keys
 - Assistant secrets stay server-side: OPENAI_API_KEY is never exposed to the browser
 - Assistant scope guardrails: the assistant only answers app-grounded privacy-removal questions and refuses unrelated topics
+
+## AI assistant
+
+This repo includes a minimal assistant foundation for this app.
+
+### What it is for
+
+The assistant is only meant to help with:
+
+- broker records already in the app
+- removal workflow steps
+- request status
+- explaining broker replies in app context
+- next best action inside the app
+
+### What it will refuse
+
+The assistant is not a general chatbot. It refuses unrelated topics such as:
+
+- general chat
+- politics
+- medical advice
+- general legal advice
+- coding help unrelated to this app
+- unrelated internet research
+
+### How to enable it
+
+Set:
+````
+ENABLE_AI_ASSISTANT=true
+OPENAI_MODEL=gpt-5.4
+ASSISTANT_SCOPE_MODE=strict
+OPENAI_API_KEY=sk-...
+````
