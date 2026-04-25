@@ -53,20 +53,7 @@ const FAQ_ITEMS = [
   },
   {
     title: "WHO ARE THE DATA BROKERS?",
-    content: (
-      <div className="space-y-3">
-        <p className="text-warmgray/80">
-          This is the current list of data brokers that will be contacted:
-        </p>
-        <ul className="ml-5 grid grid-cols-2 gap-2 text-warmgray/80 text-sm">
-          {brokerNames.map((broker) => (
-            <li key={broker} className="list-disc">
-              {broker}
-            </li>
-          ))}
-        </ul>
-      </div>
-    ),
+    content: null,
   },
   {
     title: "WHO BUILT THIS?",
@@ -114,6 +101,23 @@ export function DataBrokerInfo({ brokerNames }: DataBrokerInfoProps) {
     <div className="w-full max-w-4xl mx-auto space-y-3">
       {FAQ_ITEMS.map((item, index) => {
         const isOpen = openItems.has(index);
+        const content =
+          item.title === "WHO ARE THE DATA BROKERS?" ? (
+            <div className="space-y-3">
+              <p className="text-warmgray/80">
+                This is the current list of data brokers that will be contacted:
+              </p>
+              <ul className="ml-5 grid grid-cols-2 gap-2 text-warmgray/80 text-sm">
+                {brokerNames.map((broker) => (
+                  <li key={broker} className="list-disc">
+                    {broker}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            item.content
+          );
         return (
           <Collapsible.Root
             key={index}
@@ -132,7 +136,7 @@ export function DataBrokerInfo({ brokerNames }: DataBrokerInfoProps) {
               />
             </Collapsible.Trigger>
             <Collapsible.Content className="bg-plum-900 p-4 border-t border-plum-600">
-              {item.content}
+              {content}
             </Collapsible.Content>
           </Collapsible.Root>
         );
