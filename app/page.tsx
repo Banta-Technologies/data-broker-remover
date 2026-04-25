@@ -1,9 +1,13 @@
 import { DataBrokerInfo } from "@/components/data-broker-remover/DataBrokerInfo";
 import { DataBrokerExperience } from "@/components/data-broker-remover/DataBrokerExperience";
 import { getAssistantConfig } from "@/lib/assistant/config";
+import { getBrokerList } from "@/lib/data-broker-remover/aws-clients";
 
 export default function Home() {
   const assistantConfig = getAssistantConfig();
+  const brokerNames = getBrokerList()
+    .map((broker) => broker.name)
+    .sort((a, b) => a.localeCompare(b));
 
   return (
     <div className="min-h-screen bg-[#2E2A44] py-12 px-4">
@@ -32,7 +36,7 @@ export default function Home() {
 
         {/* FAQ Section */}
         <div className="pt-8">
-          <DataBrokerInfo />
+          <DataBrokerInfo brokerNames={brokerNames} />
         </div>
       </div>
     </div>

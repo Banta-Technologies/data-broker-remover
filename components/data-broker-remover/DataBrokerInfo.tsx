@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import * as Collapsible from "@radix-ui/react-collapsible";
-import { BROKER_NAMES } from "@/lib/data-broker-remover/broker-list";
 import Link from "next/link";
 
 const FAQ_ITEMS = [
@@ -60,7 +59,7 @@ const FAQ_ITEMS = [
           This is the current list of data brokers that will be contacted:
         </p>
         <ul className="ml-5 grid grid-cols-2 gap-2 text-warmgray/80 text-sm">
-          {BROKER_NAMES.map((broker) => (
+          {brokerNames.map((broker) => (
             <li key={broker} className="list-disc">
               {broker}
             </li>
@@ -92,7 +91,11 @@ const FAQ_ITEMS = [
   },
 ];
 
-export function DataBrokerInfo() {
+interface DataBrokerInfoProps {
+  brokerNames: string[];
+}
+
+export function DataBrokerInfo({ brokerNames }: DataBrokerInfoProps) {
   const [openItems, setOpenItems] = useState<Set<number>>(new Set());
 
   const toggleItem = (index: number) => {
